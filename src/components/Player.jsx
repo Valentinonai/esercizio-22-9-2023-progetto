@@ -14,7 +14,7 @@ const Player = () => {
   return (
     <Container fluid className="fixed-bottom bg-container pt-1 ">
       <Row>
-        <Col xs={songTitle ? 8 : 12}>
+        <Col xs={8}>
           <Row>
             <Col xs={6} md={4} lg={2} className="offset-3 offse-md-4 offset-lg-5 playerControls mt-1">
               <div className="d-flex justify-content-between">
@@ -54,21 +54,19 @@ const Player = () => {
             </Col>
           </Row>
         </Col>
-        {songTitle && (
-          <Col xs={4}>
-            <Row>
-              <Col xs={8} className="text-white">
-                <h4>{songTitle}</h4>
-                <h6>{albumTitle}</h6>
-              </Col>
-              <Col xl={4} className="d-none d-xl-block">
-                <div className="me-5" style={{ overflow: "hidden" }}>
-                  <img src={albumCover} alt="albumCover" width="100%" />
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        )}
+        <Col xs={4}>
+          <Row>
+            <Col xs={8} className="text-white">
+              <h4>{songTitle}</h4>
+              <h6>{albumTitle}</h6>
+            </Col>
+            <Col xs={4}>
+              <div className="me-5">
+                <img src={albumCover} alt="albumCover" width="100%" />
+              </div>
+            </Col>
+          </Row>
+        </Col>
       </Row>
     </Container>
   );

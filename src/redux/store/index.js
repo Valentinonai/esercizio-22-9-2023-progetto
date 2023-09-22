@@ -7,7 +7,6 @@ import generalReducers from "../reducers/GeneralReducers";
 import player from "../reducers/Player";
 import like from "../reducers/Like";
 import albumState from "../reducers/AlbumReducer";
-import favourites from "../reducers/Favourites";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +16,7 @@ const persistConfig = {
       secretKey: process.env.REACT_APP_LOCALSTORAGEKEY,
     }),
   ],
+  blacklist: ["GeneralReducers"], //WHITELIST COMP SALVATI
 };
 
 const rootReducer = combineReducers({
@@ -24,7 +24,6 @@ const rootReducer = combineReducers({
   Player: player,
   Like: like,
   albumState: albumState,
-  favourites: favourites,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
