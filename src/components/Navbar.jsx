@@ -1,8 +1,18 @@
 import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import logo from "../logo/Spotify_Logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { search, setQueryParam } from "../redux/actions";
 
 const Topbar = () => {
+  const location = useLocation();
+  const [Input, setInput] = useState("");
+  const dispatch = useDispatch();
+  const callsearch = () => {
+    dispatch(setQueryParam(Input));
+    dispatch(search(Input));
+  };
   return (
     <Navbar
       expand="lg"
@@ -29,9 +39,30 @@ const Topbar = () => {
                 </Col>
                 <Col xs={12} className="mt-3">
                   <NavLink to={""} style={{ textDecoration: "none", color: "gray" }}>
-                    <i class="fas fa-book-open fa-lg"></i>&nbsp; Your Librar
+                    <i class="fas fa-book-open fa-lg"></i>&nbsp; Your Library
                   </NavLink>
                 </Col>
+                {location.pathname === "/" && (
+                  <Col xs={12}>
+                    <div class="input-group mt-3">
+                      <input
+                        type="text"
+                        value={Input}
+                        class="form-control mb-2"
+                        id="searchField"
+                        placeholder="Search"
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                        onChange={(e) => setInput(e.target.value)}
+                      />
+                      <div class="input-group-append" style={{ marginBottom: "4%" }}>
+                        <Button variant="outline-secondary" type="button" id="button-addon1" onClick={callsearch}>
+                          GO
+                        </Button>
+                      </div>
+                    </div>
+                  </Col>
+                )}
               </Row>
             </Nav>
           </Col>

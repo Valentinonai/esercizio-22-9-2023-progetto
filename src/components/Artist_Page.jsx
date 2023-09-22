@@ -1,7 +1,63 @@
 import { Col, Row } from "react-bootstrap";
 import MainLinks from "./MainLinks";
+import { useEffect } from "react";
 
 const ArtistPage = () => {
+  const fetchArtist = async () => {
+    let artistId = new URLSearchParams(document.location.search).get("id");
+    try {
+      let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId, {
+        method: "GET",
+      });
+
+      if (response.ok) {
+        let artist = await response.json();
+
+        // displaying the playButton
+        let playButton = document.querySelector("#playButton");
+        playButton.classList.remove("d-none");
+        playButton.classList.add("d-inline");
+
+        // displaying the followButton
+        let followButton = document.querySelector("#followButton");
+        followButton.classList.remove("d-none");
+        followButton.classList.add("d-inline");
+
+        // setting the artist name
+        let titleMain = document.querySelector(".titleMain");
+        titleMain.innerHTML = artist.name;
+
+        // setting the followers section
+        let followers = document.querySelector("#followers");
+        followers.innerText = artist.nb_fan + " followers";
+
+        let tracksResponse = await fetch(
+          // await the fetch of the artist songs
+          "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + artist.name,
+          {
+            method: "GET",
+          }
+        );
+
+        if (tracksResponse.ok) {
+          let tracklist = await tracksResponse.json();
+          for (let i = 0; i < tracklist.data.length; i++) {
+            let apiLoaded = document.querySelector("#apiLoaded");
+            apiLoaded.innerHTML += albumCard(tracklist.data[i]);
+          }
+        }
+      } else {
+        // something went wrong with the request --> i.e. headers missing, wrong HTTP Method
+        document.querySelector("#apiLoaded").innerHTML = "NOT OK" + (await response.text());
+      }
+    } catch (exception) {
+      // ex.: Url is not correct, Internal Server Error
+      document.querySelector("#apiLoaded").innerHTML = exception;
+    }
+  };
+  useEffect(() => {
+    fetchArtist();
+  }, []);
   return (
     <>
       <MainLinks />

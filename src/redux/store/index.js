@@ -3,6 +3,7 @@ import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
+import generalReducers from "../reducers/GeneralReducers";
 
 const persistConfig = {
   key: "root",
@@ -12,11 +13,11 @@ const persistConfig = {
       secretKey: process.env.REACT_APP_LOCALSTORAGEKEY,
     }),
   ],
-  whitelist: [], //WHITELIST COMP SALVATI
+  blacklist: ["GeneralReducers"], //WHITELIST COMP SALVATI
 };
 
 const rootReducer = combineReducers({
-  //REDUCERS
+  GeneralReducers: generalReducers,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
