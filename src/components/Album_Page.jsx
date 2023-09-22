@@ -3,32 +3,37 @@ import MainLinks from "./MainLinks";
 import { useEffect, useState } from "react";
 import AlbumDetails from "./AlbumDetails";
 import AlbumArt from "./AlbumArt";
+import { useDispatch, useSelector } from "react-redux";
+import { albumdetails } from "../redux/actions";
 
 const AlbumSinglePage = () => {
-  const [albumState, setAlbumState] = useState(null);
+  //   const [albumState, setAlbumState] = useState(null);
+  const albumState = useSelector((state) => state.albumState.obj);
+  const dispatch = useDispatch();
 
-  const fetchDetails = async () => {
-    let albumId = new URLSearchParams(document.location.search).get("id");
-    try {
-      let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId, {
-        method: "GET",
-      });
+  //   const fetchDetails = async () => {
+  //     let albumId = new URLSearchParams(document.location.search).get("id");
+  //     try {
+  //       let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId, {
+  //         method: "GET",
+  //       });
 
-      if (response.ok) {
-        let album = await response.json(); // transforms the response into a JSON
-        setAlbumState(album);
-      } else {
-        // something went wrong with the request --> i.e. headers missing, wrong HTTP Method
-        document.querySelector("#img-container").innerHTML = "NOT OK" + (await response.text());
-      }
-    } catch (exception) {
-      // ex.: Url is not correct, Internal Server Error
-      document.querySelector("#img-container").innerHTML = exception;
-    }
-  };
+  //       if (response.ok) {
+  //         let album = await response.json(); // transforms the response into a JSON
+  //         setAlbumState(album);
+  //       } else {
+  //         // something went wrong with the request --> i.e. headers missing, wrong HTTP Method
+  //         document.querySelector("#img-container").innerHTML = "NOT OK" + (await response.text());
+  //       }
+  //     } catch (exception) {
+  //       // ex.: Url is not correct, Internal Server Error
+  //       document.querySelector("#img-container").innerHTML = exception;
+  //     }
+  //   };
 
   useEffect(() => {
-    fetchDetails();
+    // fetchDetails();
+    dispatch(albumdetails());
     console.log(albumState);
   }, []);
 
