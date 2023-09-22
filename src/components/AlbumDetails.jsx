@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { addFav, addLike, removeFav, removeLike, selectSong } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,8 +6,10 @@ const AlbumDetails = ({ album }) => {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.Like.songs);
   const fav = useSelector((state) => state.favourites.songs);
+  const location = useLocation();
   return album.tracks.data.map((elem, i) => (
     <div className="py-3 trackHover d-flex" key={`track${i}`}>
+      {console.log(location)}
       {likes.find((x) => x === elem.id) ? (
         <div
           onClick={() => {
@@ -28,7 +30,7 @@ const AlbumDetails = ({ album }) => {
         </div>
       )}
       <Link
-        to={""}
+        to={`/album_page.html${location.search}`}
         className="card-title trackHover text-white px-3"
         onClick={() => {
           dispatch(selectSong(elem.title, elem.album.title, elem.album.cover_medium));
