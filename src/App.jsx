@@ -1,9 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Player from "./components/Player";
 import Topbar from "./components/Navbar";
+import Home from "./components/Home";
+import ArtistPage from "./components/Artist_Page";
+import AlbumPage from "./components/Album_Page";
 
 function App() {
   return (
@@ -16,9 +19,9 @@ function App() {
             </Col>
             <Col xs={12} md={9} className="offset-md-3 mainPage">
               <Routes>
-                <Route path="/" />
-                <Route path="/artist_page" />
-                <Route path="album_page" />
+                <Route path="/" element={<Home />} />
+                <Route path="/artist_page" element={<ArtistPage />} />
+                <Route path="album_page" element={<AlbumPage />} />
               </Routes>
               <Player />
             </Col>
