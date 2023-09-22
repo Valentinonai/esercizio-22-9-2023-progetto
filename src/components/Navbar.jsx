@@ -39,7 +39,7 @@ const Topbar = () => {
                 </Col>
                 <Col xs={12} className="mt-3">
                   <NavLink to={"/favourites.html"} style={{ textDecoration: "none", color: "gray" }}>
-                    <i class="fas fa-book-open fa-lg"></i>&nbsp; Your Library
+                    <i class="fas fa-book-open fa-lg"></i>&nbsp; PlayList
                   </NavLink>
                 </Col>
                 {location.pathname === "/" && (
