@@ -7,6 +7,7 @@ import Topbar from "./components/Navbar";
 import Home from "./components/Home";
 import ArtistPage from "./components/Artist_Page";
 import AlbumPage from "./components/Album_Page";
+import Favs from "./components/favs";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/artist_page.html" element={<ArtistPage />} />
                 <Route path="/album_page.html" element={<AlbumPage />} />
+                <Route path="/favourites.html" element={<Favs />} />
               </Routes>
               <Player />
             </Col>
