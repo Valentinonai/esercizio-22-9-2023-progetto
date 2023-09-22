@@ -17,6 +17,7 @@ const persistConfig = {
       secretKey: process.env.REACT_APP_LOCALSTORAGEKEY,
     }),
   ],
+  blacklist: ["GeneralReducers"],
 };
 
 const rootReducer = combineReducers({
