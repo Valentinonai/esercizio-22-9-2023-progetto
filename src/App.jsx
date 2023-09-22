@@ -21,7 +21,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/artist_page.html" element={<ArtistPage />} />
-                <Route path="album_page.html" element={<AlbumPage />} />
+                <Route path="/album_page.html" element={<AlbumPage />} />
               </Routes>
               <Player />
             </Col>

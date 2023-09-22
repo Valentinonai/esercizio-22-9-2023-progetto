@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AlbumDetails from "./AlbumDetails";
 import AlbumArt from "./AlbumArt";
 
-const AlbumPage = () => {
+const AlbumSinglePage = () => {
   const [albumState, setAlbumState] = useState(null);
 
   const fetchDetails = async () => {
@@ -50,4 +50,4 @@ const AlbumPage = () => {
     </>
   );
 };
-export default AlbumPage;
+export default AlbumSinglePage;

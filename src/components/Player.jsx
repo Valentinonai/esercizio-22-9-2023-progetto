@@ -5,12 +5,16 @@ import play from "../playerbuttons/Play.png";
 import previus from "../playerbuttons/Previous.png";
 import repeat from "../playerbuttons/Repeat.png";
 import shuffle from "../playerbuttons/Shuffle.png";
+import { useSelector } from "react-redux";
 
 const Player = () => {
+  const songTitle = useSelector((state) => state.Player.songTitle);
+  const albumTitle = useSelector((state) => state.Player.albumTitle);
+  const albumCover = useSelector((state) => state.Player.albumCover);
   return (
-    <Container fluid className="fixed-bottom bg-container pt-1">
+    <Container fluid className="fixed-bottom bg-container pt-1 ">
       <Row>
-        <Col lg={10} className="offset-lg-2">
+        <Col xs={8}>
           <Row>
             <Col xs={6} md={4} lg={2} className="offset-3 offse-md-4 offset-lg-5 playerControls mt-1">
               <div className="d-flex justify-content-between">
@@ -46,6 +50,19 @@ const Player = () => {
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <Col xs={4}>
+          <Row>
+            <Col xs={8} className="text-white">
+              <h4>{songTitle}</h4>
+              <h6>{albumTitle}</h6>
+            </Col>
+            <Col xs={4}>
+              <div className="me-5">
+                <img src={albumCover} alt="albumCover" width="100%" />
               </div>
             </Col>
           </Row>
