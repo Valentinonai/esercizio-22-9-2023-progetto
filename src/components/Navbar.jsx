@@ -38,7 +38,7 @@ const Topbar = () => {
                   </NavLink>
                 </Col>
                 <Col xs={12} className="mt-3">
-                  <NavLink to={""} style={{ textDecoration: "none", color: "gray" }}>
+                  <NavLink to={"/favourites.html"} style={{ textDecoration: "none", color: "gray" }}>
                     <i class="fas fa-book-open fa-lg"></i>&nbsp; Your Library
                   </NavLink>
                 </Col>

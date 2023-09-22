@@ -1,10 +1,11 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { addLike, removeLike, selectSong } from "../redux/actions";
+import { addFav, addLike, removeFav, removeLike, selectSong } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const AlbumDetails = ({ album }) => {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.Like.songs);
+  const fav = useSelector((state) => state.favourites.songs);
   return album.tracks.data.map((elem, i) => (
     <div className="py-3 trackHover d-flex" key={`track${i}`}>
       {likes.find((x) => x === elem.id) ? (
@@ -44,6 +45,30 @@ const AlbumDetails = ({ album }) => {
           ? "0" + (parseInt(elem.duration) % 60) // checking che duration seconds, if they are less than 10 a 0 is prefixed
           : parseInt(elem.duration) % 60}
       </small>
+
+      <div className="ms-3">
+        {fav.find((x) => x.songId === elem.id) ? (
+          <div
+            style={{ color: "white" }}
+            onClick={() => {
+              dispatch(removeFav(elem.id));
+            }}
+          >
+            {" "}
+            <i class="bi bi-dash-lg"></i>
+          </div>
+        ) : (
+          <div
+            style={{ color: "white" }}
+            onClick={() => {
+              dispatch(addFav(elem.title, elem.id, elem.album.cover_medium));
+            }}
+          >
+            {" "}
+            <i class="bi bi-plus-lg"></i>
+          </div>
+        )}
+      </div>
     </div>
   ));
 };
