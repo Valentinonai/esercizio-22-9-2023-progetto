@@ -46,25 +46,3 @@ export const search = (searchQuery) => {
     }
   };
 };
-
-export const albumdetails = () => {
-  return async (dispatch) => {
-    let albumId = new URLSearchParams(document.location.search).get("id");
-    try {
-      let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId, {
-        method: "GET",
-      });
-
-      if (response.ok) {
-        let album = await response.json(); // transforms the response into a JSON
-        dispatch({ type: ALBUM_DETAILS, payload: album });
-      } else {
-        // something went wrong with the request --> i.e. headers missing, wrong HTTP Method
-        document.querySelector("#img-container").innerHTML = "NOT OK" + (await response.text());
-      }
-    } catch (exception) {
-      // ex.: Url is not correct, Internal Server Error
-      document.querySelector("#img-container").innerHTML = exception;
-    }
-  };
-};
